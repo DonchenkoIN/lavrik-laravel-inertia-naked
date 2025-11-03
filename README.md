@@ -1,7 +1,7 @@
 
 ## Задействованы 
 - Laravel 12, 
-- Inertia, 
+- Inertia 2, 
 - Vue 3, 
 - React, 
 - MySQL
