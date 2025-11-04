@@ -11,4 +11,5 @@
 - composer install
 - npm install
 - cp .env.example .env
-- php artisan migrate (если не использовать дамп БД)
+- php artisan migrate --seed (если не использовать дамп БД)
+

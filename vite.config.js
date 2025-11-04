@@ -8,7 +8,7 @@ export default defineConfig({
         vue(),
         react(),
         laravel({
-            input: ['resources/js-react/app.jsx'],
+            input: ['resources/js-vue/app.vue'],
             refresh: true,
         }),
     ],
