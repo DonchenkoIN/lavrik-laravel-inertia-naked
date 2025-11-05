@@ -1,5 +1,6 @@
 <script setup>
 import {Link} from "@inertiajs/vue3";
+
 </script>
 
 <template>
@@ -7,6 +8,7 @@ import {Link} from "@inertiajs/vue3";
     <div>nav
         <Link href="/">Home</Link>
         <Link href="/other">Other</Link>
+        <Link href="/posts">Posts</Link>
         <hr>
     </div>
     <div><slot></slot><hr></div>
