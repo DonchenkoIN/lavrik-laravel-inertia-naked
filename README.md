@@ -13,3 +13,5 @@
 - cp .env.example .env
 - php artisan migrate --seed (если не использовать дамп БД)
 
+Я исходил из того, что url это по сути slag, формируемый из title поста.
+
