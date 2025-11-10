@@ -1,17 +1,29 @@
 <script setup>
 import DefaultLayout from "../../Layouts/DefaultLayout.vue";
-import {Link, useForm} from "@inertiajs/vue3";
+import {Link, router, useForm} from "@inertiajs/vue3";
+import PostsRoutes from './../../../generated/wayfinder/actions/App/Http/Controllers/PostController'
+import DataTable from "../../components/UI/DataTable.vue";
+import Modal from "../../components/UI/Modal.vue";
+import {ref} from "vue";
 
 defineProps({
     posts: {type: Array, required: true}
 })
 
 const form = useForm({});
-function destroy(id) {
-    if (confirm(`Вы уверены, что хотите удалить пост с ID: ${id}`)) {
-        // console.log("/posts/" + id)
-        form.delete("/posts/" + id);
-    }
+
+const postForRemove = ref(null);
+
+function destroy(post) {
+    postForRemove.value = post
+}
+
+function removeConfirmed() {
+    router.delete(PostsRoutes.destroy(postForRemove.value).url, {
+        onFinish(){
+            postForRemove.value = null
+        }
+    })
 }
 
 </script>
@@ -19,16 +31,28 @@ function destroy(id) {
 <template>
     <DefaultLayout>
         <div>
-            <Link href="posts/create">Создать</Link>
+            <Link :href="PostsRoutes.create().url">Создать</Link>
         </div>
-        <div v-for="post in posts" :key="post.id">
-            {{ post.id }} |
-            {{ post.title }} |
-            <Link :href="'posts/' + post.id + '/edit'">Редактировать</Link> |
-            <Link :href="'posts/' + post.id">Просмотреть</Link> |
-            <button @click="destroy(post.id)" >Удалить</button> |
+        <DataTable :data="posts" :headers="['id', 'created_at', 'title', 'content', 'actions']">
+            <template #item.created_at="{ item }">
+                {{ (new Date(item.created_at)).toLocaleString() }}
+            </template>
+            <template #item.actions="{ item }">
+                <Link :href="PostsRoutes.show(item).url" type="button" class="btn btn-primary mx-1">Просмотреть</Link>
+                <Link :href="PostsRoutes.edit(item).url" type="button" class="btn btn-primary">Редактировать</Link>
+                <button @click="destroy(item)" type="button" class="btn btn-danger ms-2">Удалить</button>
+            </template>
 
-        </div>
+        </DataTable>
+        <Modal
+            :open="postForRemove != null"
+            @ok="removeConfirmed()"
+            @close="postForRemove = null"
+        >
+            <template #default>
+                <h1 v-if="postForRemove">Вы действительно хотите удалить пост с ID: {{postForRemove.id}}</h1>
+            </template>
+        </Modal>
     </DefaultLayout>
 </template>
 <style scoped>

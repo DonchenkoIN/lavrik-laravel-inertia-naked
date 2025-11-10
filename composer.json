@@ -13,6 +13,7 @@
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
+        "laravel/wayfinder": "^0.1.12",
         "tightenco/ziggy": "^2.6"
     },
     "require-dev": {
@@ -71,6 +72,9 @@
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ],
+        "routes": [
+            "@php artisan wayfinder:generate --path=resources/generated/wayfinder --skip-routes"
         ]
     },
     "extra": {

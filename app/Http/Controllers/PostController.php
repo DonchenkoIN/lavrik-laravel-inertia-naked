@@ -16,7 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('id', 'ASC')->byUserId()->get();
         $posts = PostResource::collection($posts)->resolve();
 
         return inertia('Post/Index', compact('posts'));

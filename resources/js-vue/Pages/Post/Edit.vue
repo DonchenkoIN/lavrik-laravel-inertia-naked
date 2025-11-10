@@ -2,6 +2,7 @@
 
 import {useForm} from "@inertiajs/vue3";
 import DefaultLayout from "../../Layouts/DefaultLayout.vue";
+import PostsRoutes from './../../../generated/wayfinder/actions/App/Http/Controllers/PostController';
 
 const props = defineProps({
     post: {
@@ -19,7 +20,7 @@ const form = useForm({
 })
 
 const submit = () => {
-    form.put('/posts/' + props.post.id);
+    form.put(PostsRoutes.update(form).url);
 };
 </script>
 

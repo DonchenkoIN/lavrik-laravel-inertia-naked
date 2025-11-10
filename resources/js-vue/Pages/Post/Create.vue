@@ -2,6 +2,7 @@
 
 import {useForm} from "@inertiajs/vue3";
 import DefaultLayout from "../../Layouts/DefaultLayout.vue";
+import PostsRoutes from './../../../generated/wayfinder/actions/App/Http/Controllers/PostController';
 
 const props = defineProps({
     post: {
@@ -16,8 +17,7 @@ const form = useForm({
 })
 
 const submit = () => {
-    form.post('/posts');
-    // form.post(route("posts.store"));
+    form.post(PostsRoutes.store().url);
 };
 </script>
 
@@ -25,19 +25,24 @@ const submit = () => {
     <div>
         <DefaultLayout>
             <form @submit.prevent="submit">
-                <input v-model="form.title" type="text" placeholder="Заголовок"/>
-                <div v-if="form.errors.title">
-                    <div>
-                        {{ form.errors.title }}
+                <div class="mb-3">
+                    <input class="form-control" v-model="form.title" type="text" placeholder="Заголовок"/>
+                    <div v-if="form.errors.title">
+                        <div class="text-danger">
+                            {{ form.errors.title }}&nbsp;
+                        </div>
                     </div>
                 </div>
-                <input v-model="form.content" type="text" placeholder="Контент"/>
-                <div v-if="form.errors.content">
-                    <div>
-                        {{ form.errors.content }}
+
+                <div class="mb-3">
+                    <input class="form-control" v-model="form.content" type="text" placeholder="Контент"/>
+                    <div v-if="form.errors.content">
+                        <div class="text-danger">
+                            {{ form.errors.content }}&nbsp;
+                        </div>
                     </div>
                 </div>
-                <button type="submit">Записать</button>
+                <button type="submit" class="btn btn-primary" :disabled="form.processing">Записать</button>
             </form>
         </DefaultLayout>
     </div>

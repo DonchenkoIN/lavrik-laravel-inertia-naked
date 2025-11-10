@@ -17,4 +17,9 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeByUserId($query)
+    {
+        return $query->where('user_id', auth()->user()->id);
+    }
 }

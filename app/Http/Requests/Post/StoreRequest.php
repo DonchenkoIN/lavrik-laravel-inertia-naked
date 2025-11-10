@@ -28,10 +28,9 @@ class StoreRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'user_id' => fake()->randomElement(User::all()->pluck('id')),
+            'user_id' => auth()->user()->id,
             'url' => Str::slug($this->title),
         ]);
-
     }
 
     public function messages(): array
