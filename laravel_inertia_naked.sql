@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Ноя 05 2025 г., 03:45
+-- Время создания: Ноя 11 2025 г., 01:21
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.1.9
 
@@ -116,7 +116,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '0001_01_01_000000_create_users_table', 1),
 (2, '0001_01_01_000001_create_cache_table', 1),
 (3, '0001_01_01_000002_create_jobs_table', 1),
-(4, '2025_11_04_181815_create_posts_table', 1);
+(4, '2025_11_04_181815_create_posts_table', 1),
+(5, '2025_11_10_213857_create_tags_table', 1),
+(6, '2025_11_10_214759_create_post_tag_table', 1);
 
 -- --------------------------------------------------------
 
@@ -151,33 +153,113 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `user_id`, `title`, `content`, `url`, `created_at`, `updated_at`) VALUES
-(2, 2, 'est cumque', 'Earum recusandae.', 'est-cumque', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(3, 3, 'perferendis ea', 'Voluptatibus.', 'perferendis-ea', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(4, 8, 'cum', 'Est corporis iure.', 'cum', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(5, 7, 'praesentium atque', 'Quaerat aut unde.', 'praesentium-atque', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(6, 3, 'eius', 'Nihil qui ut.', 'eius', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(7, 6, 'sed', 'Enim dolorem.', 'sed', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(8, 9, 'vero repudiandae', 'Vel aut hic facilis.', 'vero-repudiandae', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(9, 2, 'ipsam magnam dolores', 'Facere sapiente.', 'ipsam-magnam-dolores', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(10, 2, 'eligendi perspiciatis', 'Maiores officiis ex.', 'eligendi-perspiciatis', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(11, 6, 'aspernatur', 'Ab ex debitis eaque.', 'aspernatur', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(12, 2, 'voluptatibus facilis', 'Repudiandae.', 'voluptatibus-facilis', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(13, 9, 'id sit ea', 'Et ut voluptatum.', 'id-sit-ea', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(14, 2, 'ut eum', 'Culpa expedita.', 'ut-eum', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(15, 5, 'quod autem harum', 'Voluptate numquam.', 'quod-autem-harum', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(16, 2, 'et', 'Corrupti iusto et.', 'et', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(17, 8, 'quo delectus illum', 'Aliquid sit debitis.', 'quo-delectus-illum', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(18, 10, 'ipsam id', 'Voluptatem natus.', 'ipsam-id', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(19, 1, 'maiores eum voluptate', 'Itaque aut et qui.', 'maiores-eum-voluptate', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(20, 1, 'sint dolores', 'Tempora suscipit.', 'sint-dolores', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(21, 5, 'Ab atque laborum qui', 'Rerum nostrud in seq', 'ab-atque-laborum-qui', '2025-11-04 20:14:49', '2025-11-04 20:14:49'),
-(22, 9, 'Voluptatem voluptate', 'Exercitation ut esse', 'voluptatem-voluptate', '2025-11-04 20:15:28', '2025-11-04 20:15:28'),
-(24, 1, 'Ex obcaecati commodi', 'Iure suscipit qui eo', 'ex-obcaecati-commodi', '2025-11-04 20:19:03', '2025-11-04 20:19:03'),
-(25, 9, 'Iure vero hic laudan', 'Et consequatur culpa', 'iure-vero-hic-laudan', '2025-11-04 20:19:31', '2025-11-04 20:19:31'),
-(26, 2, 'Harum facilis quaera', 'Ut in aliquip duis v', 'harum-facilis-quaera', '2025-11-04 20:19:43', '2025-11-04 20:19:43'),
-(27, 10, 'Dolorum elit recusa', 'Aliquam voluptas fug', 'dolorum-elit-recusa', '2025-11-04 20:30:27', '2025-11-04 20:30:27'),
-(28, 1, 'Aliquip voluptas con', 'Magnam unde qui comm', 'aliquip-voluptas-con', '2025-11-04 20:35:20', '2025-11-04 20:35:20'),
-(29, 9, 'Eos omnis ut quibus', 'Mollit nisi vero cum', 'eos-omnis-ut-quibus', '2025-11-04 20:39:57', '2025-11-04 20:39:57');
+(1, 3, 'veritatis ut', 'Provident et.', 'veritatis-ut', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(2, 1, 'et ea doloremque', 'Tempore et enim.', 'et-ea-doloremque', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(3, 8, 'rerum', 'Nostrum a.', 'rerum', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(4, 2, 'omnis quos', 'Quam et quisquam.', 'omnis-quos', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(5, 10, 'voluptates', 'Rerum aut assumenda.', 'voluptates', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(6, 7, 'quo neque quam', 'Quis tempore.', 'quo-neque-quam', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(7, 9, 'eos', 'Vel aperiam.', 'eos', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(8, 8, 'est molestias', 'Illum inventore.', 'est-molestias', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(9, 8, 'aut', 'Voluptate labore.', 'aut', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(10, 8, 'consectetur et', 'Iusto quae.', 'consectetur-et', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(11, 7, 'consequuntur rerum', 'Reprehenderit nisi.', 'consequuntur-rerum', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(12, 3, 'esse', 'Necessitatibus.', 'esse', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(13, 4, 'saepe delectus', 'Omnis repellendus.', 'saepe-delectus', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(14, 9, 'nihil', 'Vel quia dolore.', 'nihil', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(15, 10, 'aut molestiae eum', 'Exercitationem ea.', 'aut-molestiae-eum', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(16, 4, 'voluptas recusandae', 'Laborum expedita.', 'voluptas-recusandae', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(17, 2, 'sed ratione', 'Quae necessitatibus.', 'sed-ratione', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(18, 4, 'reiciendis voluptatum', 'Maiores dolorum.', 'reiciendis-voluptatum', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(19, 7, 'ducimus', 'Commodi adipisci.', 'ducimus', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(20, 6, 'est error mollitia', 'Voluptatem et hic.', 'est-error-mollitia', '2025-11-10 19:19:55', '2025-11-10 19:19:55');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `post_tag`
+--
+
+CREATE TABLE `post_tag` (
+  `id` bigint UNSIGNED NOT NULL,
+  `post_id` bigint UNSIGNED NOT NULL,
+  `tag_id` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `post_tag`
+--
+
+INSERT INTO `post_tag` (`id`, `post_id`, `tag_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 5, NULL, NULL),
+(2, 2, 2, NULL, NULL),
+(3, 2, 4, NULL, NULL),
+(4, 3, 3, NULL, NULL),
+(5, 3, 4, NULL, NULL),
+(6, 4, 1, NULL, NULL),
+(7, 4, 3, NULL, NULL),
+(8, 4, 4, NULL, NULL),
+(9, 4, 5, NULL, NULL),
+(10, 5, 2, NULL, NULL),
+(11, 5, 5, NULL, NULL),
+(12, 6, 1, NULL, NULL),
+(13, 6, 2, NULL, NULL),
+(14, 6, 3, NULL, NULL),
+(15, 6, 4, NULL, NULL),
+(16, 6, 5, NULL, NULL),
+(17, 7, 1, NULL, NULL),
+(18, 7, 2, NULL, NULL),
+(19, 7, 4, NULL, NULL),
+(20, 7, 5, NULL, NULL),
+(21, 8, 1, NULL, NULL),
+(22, 8, 2, NULL, NULL),
+(23, 8, 4, NULL, NULL),
+(24, 8, 5, NULL, NULL),
+(25, 9, 1, NULL, NULL),
+(26, 9, 2, NULL, NULL),
+(27, 9, 3, NULL, NULL),
+(28, 10, 2, NULL, NULL),
+(29, 10, 3, NULL, NULL),
+(30, 11, 1, NULL, NULL),
+(31, 11, 2, NULL, NULL),
+(32, 11, 3, NULL, NULL),
+(33, 11, 4, NULL, NULL),
+(34, 11, 5, NULL, NULL),
+(35, 12, 1, NULL, NULL),
+(36, 12, 2, NULL, NULL),
+(37, 12, 4, NULL, NULL),
+(38, 12, 5, NULL, NULL),
+(39, 13, 1, NULL, NULL),
+(40, 13, 2, NULL, NULL),
+(41, 13, 3, NULL, NULL),
+(42, 13, 5, NULL, NULL),
+(43, 14, 1, NULL, NULL),
+(44, 14, 2, NULL, NULL),
+(45, 14, 3, NULL, NULL),
+(46, 14, 4, NULL, NULL),
+(47, 14, 5, NULL, NULL),
+(48, 15, 1, NULL, NULL),
+(49, 15, 2, NULL, NULL),
+(50, 15, 3, NULL, NULL),
+(51, 15, 4, NULL, NULL),
+(52, 15, 5, NULL, NULL),
+(53, 16, 2, NULL, NULL),
+(54, 16, 4, NULL, NULL),
+(55, 16, 5, NULL, NULL),
+(56, 17, 1, NULL, NULL),
+(57, 17, 2, NULL, NULL),
+(58, 17, 5, NULL, NULL),
+(59, 18, 3, NULL, NULL),
+(60, 18, 5, NULL, NULL),
+(61, 19, 2, NULL, NULL),
+(62, 19, 4, NULL, NULL),
+(63, 19, 5, NULL, NULL),
+(64, 20, 1, NULL, NULL),
+(65, 20, 2, NULL, NULL),
+(66, 20, 3, NULL, NULL),
+(67, 20, 4, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -194,12 +276,29 @@ CREATE TABLE `sessions` (
   `last_activity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Дамп данных таблицы `sessions`
+-- Структура таблицы `tags`
 --
 
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('wznLVfUzOE0cYtixNFCg370b76yIF1XC3M3689Wa', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibGJJckZBbW81dlZpWHBtZDVGWDJZdUxKM1hjdG1pc1Vsa0ZuamZvaiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wb3N0cyI7czo1OiJyb3V0ZSI7czoxMToicG9zdHMuaW5kZXgiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1762303511);
+CREATE TABLE `tags` (
+  `id` bigint UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `tags`
+--
+
+INSERT INTO `tags` (`id`, `title`, `created_at`, `updated_at`) VALUES
+(1, 'provident', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(2, 'qui', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(3, 'facere', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(4, 'cum', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(5, 'excepturi', '2025-11-10 19:19:55', '2025-11-10 19:19:55');
 
 -- --------------------------------------------------------
 
@@ -223,16 +322,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Мельникова Зинаида Дмитриевна', 'trofim.kabanov@example.com', '2025-11-04 16:16:46', '$2y$12$Rft.jtZ48jRD1sagY.zLfOI3KePKOWLMr2yzcMLZPyxkLr.Jl3bYu', '0ZaZoD5fwI', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(2, 'Мамонтов Дмитрий Евгеньевич', 'amerkuseva@example.com', '2025-11-04 16:16:47', '$2y$12$Rft.jtZ48jRD1sagY.zLfOI3KePKOWLMr2yzcMLZPyxkLr.Jl3bYu', 'p5c4lBMZNT', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(3, 'Трофимова Инна Львовна', 'ekaterina37@example.com', '2025-11-04 16:16:47', '$2y$12$Rft.jtZ48jRD1sagY.zLfOI3KePKOWLMr2yzcMLZPyxkLr.Jl3bYu', 'aCZlOpnmct', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(4, 'Рафаил Александрович Ситников', 'apollon.afanaseva@example.net', '2025-11-04 16:16:47', '$2y$12$Rft.jtZ48jRD1sagY.zLfOI3KePKOWLMr2yzcMLZPyxkLr.Jl3bYu', 'HshcIIDTEJ', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(5, 'Даниил Сергеевич Самсонов', 'nelli12@example.net', '2025-11-04 16:16:47', '$2y$12$Rft.jtZ48jRD1sagY.zLfOI3KePKOWLMr2yzcMLZPyxkLr.Jl3bYu', 'kUbgtpYizU', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(6, 'Селиверстова Ульяна Дмитриевна', 'egorova.anastasia@example.com', '2025-11-04 16:16:47', '$2y$12$Rft.jtZ48jRD1sagY.zLfOI3KePKOWLMr2yzcMLZPyxkLr.Jl3bYu', 'DoKj44Kc7j', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(7, 'Гришин Донат Максимович', 'ananij64@example.net', '2025-11-04 16:16:47', '$2y$12$Rft.jtZ48jRD1sagY.zLfOI3KePKOWLMr2yzcMLZPyxkLr.Jl3bYu', 'vpL0x2rO4I', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(8, 'Изабелла Львовна Матвеева', 'lukin.lubov@example.net', '2025-11-04 16:16:47', '$2y$12$Rft.jtZ48jRD1sagY.zLfOI3KePKOWLMr2yzcMLZPyxkLr.Jl3bYu', 'lHGa5ACmC5', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(9, 'Зинаида Евгеньевна Рябова', 'aksenova.diana@example.com', '2025-11-04 16:16:47', '$2y$12$Rft.jtZ48jRD1sagY.zLfOI3KePKOWLMr2yzcMLZPyxkLr.Jl3bYu', 'WVVXkdBo6Q', '2025-11-04 16:16:47', '2025-11-04 16:16:47'),
-(10, 'Шилова Лидия Евгеньевна', 'miroslav20@example.com', '2025-11-04 16:16:47', '$2y$12$Rft.jtZ48jRD1sagY.zLfOI3KePKOWLMr2yzcMLZPyxkLr.Jl3bYu', 'kEWhbTon4c', '2025-11-04 16:16:47', '2025-11-04 16:16:47');
+(1, 'Тарас Борисович Князев', 'bespalova.artur@example.com', '2025-11-10 19:19:55', '$2y$12$igyt9pYZSKNqdyPpHXkjsulo1btxTRlrnIeS0LEUhAT1z3gZ710Tq', 'Ex5jWZ8M4E', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(2, 'Князева Марина Александровна', 'donat09@example.net', '2025-11-10 19:19:55', '$2y$12$igyt9pYZSKNqdyPpHXkjsulo1btxTRlrnIeS0LEUhAT1z3gZ710Tq', 'HkeMj9ZliS', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(3, 'Лыткина Виктория Владимировна', 'gerasimov.elizaveta@example.net', '2025-11-10 19:19:55', '$2y$12$igyt9pYZSKNqdyPpHXkjsulo1btxTRlrnIeS0LEUhAT1z3gZ710Tq', 'TL4iN0mYXM', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(4, 'Сысоева Лидия Борисовна', 'ila36@example.com', '2025-11-10 19:19:55', '$2y$12$igyt9pYZSKNqdyPpHXkjsulo1btxTRlrnIeS0LEUhAT1z3gZ710Tq', '3jk5m8aAjM', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(5, 'Ефимова Зоя Алексеевна', 'hohlova.bronislav@example.com', '2025-11-10 19:19:55', '$2y$12$igyt9pYZSKNqdyPpHXkjsulo1btxTRlrnIeS0LEUhAT1z3gZ710Tq', 'MpSPFlmxn8', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(6, 'Моисеев Нестор Борисович', 'skomissarov@example.net', '2025-11-10 19:19:55', '$2y$12$igyt9pYZSKNqdyPpHXkjsulo1btxTRlrnIeS0LEUhAT1z3gZ710Tq', 'rffdLhDhPg', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(7, 'Рената Львовна Турова', 'lilia.sidorova@example.com', '2025-11-10 19:19:55', '$2y$12$igyt9pYZSKNqdyPpHXkjsulo1btxTRlrnIeS0LEUhAT1z3gZ710Tq', 'oge6rYNi9i', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(8, 'Мухин Илья Александрович', 'pahomova.ulij@example.com', '2025-11-10 19:19:55', '$2y$12$igyt9pYZSKNqdyPpHXkjsulo1btxTRlrnIeS0LEUhAT1z3gZ710Tq', 'WyyrOXc4Un', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(9, 'Елена Борисовна Носкова', 'lubov.belakov@example.net', '2025-11-10 19:19:55', '$2y$12$igyt9pYZSKNqdyPpHXkjsulo1btxTRlrnIeS0LEUhAT1z3gZ710Tq', 'P1pF65D37v', '2025-11-10 19:19:55', '2025-11-10 19:19:55'),
+(10, 'Адриан Сергеевич Калинин', 'megorov@example.org', '2025-11-10 19:19:55', '$2y$12$igyt9pYZSKNqdyPpHXkjsulo1btxTRlrnIeS0LEUhAT1z3gZ710Tq', 'KWKxhl0T0U', '2025-11-10 19:19:55', '2025-11-10 19:19:55');
 
 --
 -- Индексы сохранённых таблиц
@@ -291,12 +390,28 @@ ALTER TABLE `posts`
   ADD KEY `posts_user_id_foreign` (`user_id`);
 
 --
+-- Индексы таблицы `post_tag`
+--
+ALTER TABLE `post_tag`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `post_tag_post_id_tag_id_unique` (`post_id`,`tag_id`),
+  ADD KEY `post_tag_post_id_index` (`post_id`),
+  ADD KEY `post_tag_tag_id_index` (`tag_id`);
+
+--
 -- Индексы таблицы `sessions`
 --
 ALTER TABLE `sessions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `sessions_user_id_index` (`user_id`),
   ADD KEY `sessions_last_activity_index` (`last_activity`);
+
+--
+-- Индексы таблицы `tags`
+--
+ALTER TABLE `tags`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `tags_title_unique` (`title`);
 
 --
 -- Индексы таблицы `users`
@@ -325,13 +440,25 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT для таблицы `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT для таблицы `post_tag`
+--
+ALTER TABLE `post_tag`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+
+--
+-- AUTO_INCREMENT для таблицы `tags`
+--
+ALTER TABLE `tags`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
@@ -348,6 +475,13 @@ ALTER TABLE `users`
 --
 ALTER TABLE `posts`
   ADD CONSTRAINT `posts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Ограничения внешнего ключа таблицы `post_tag`
+--
+ALTER TABLE `post_tag`
+  ADD CONSTRAINT `post_tag_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
+  ADD CONSTRAINT `post_tag_tag_id_foreign` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

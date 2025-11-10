@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\Session;
 use App\Http\Controllers\General;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [General::class, 'home'])->name('home');
@@ -15,4 +16,5 @@ Route::middleware('guest')->group((function(){
 Route::middleware('auth')->prefix('/office')->group(function () {
     Route::delete('/sessions', [Session::class,'logout'])->name('sessions.destroy');
     Route::resource('posts', PostController::class);
+    Route::resource('tags', TagController::class);
 });
