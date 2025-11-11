@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Tag\StoreRequest;
+use App\Http\Requests\Tag\UpdateRequest;
+use App\Http\Resources\Tag\TagResource;
 use App\Models\Tag;
+use App\Services\TagService;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -12,7 +16,9 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::all();
+        $tags = TagResource::collection($tags)->resolve();
+        return inertia('Tag/Index', compact('tags'));
     }
 
     /**
@@ -20,15 +26,16 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Tag/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        TagService::store($request->validated());
+        return redirect()->route('tags.index');
     }
 
     /**
@@ -50,7 +57,7 @@ class TagController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tag $tag)
+    public function update(UpdateRequest $request, Tag $tag)
     {
         //
     }
@@ -60,6 +67,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->posts()->detach();
+        $tag->delete();
     }
 }

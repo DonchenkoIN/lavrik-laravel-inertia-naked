@@ -17,11 +17,13 @@ class StoreRequest extends FormRequest
      */
     public function rules(): array
     {
+//        dd($this);
         return [
             'user_id' => 'required|integer',
             'title' => 'required|string|min:10|max:250',
             'content' => 'required|string|min:10',
             'url' => 'required|string',
+            'tags' => 'nullable|array',
         ];
     }
 
@@ -30,6 +32,7 @@ class StoreRequest extends FormRequest
         $this->merge([
             'user_id' => auth()->user()->id,
             'url' => Str::slug($this->title),
+            'tags' => $this->tags
         ]);
     }
 

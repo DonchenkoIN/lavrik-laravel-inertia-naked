@@ -3,27 +3,22 @@
 namespace App\Services;
 
 use App\Models\Post;
-use Illuminate\Support\Arr;
+use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
 
-class PostService
+class TagService
 {
-   public static function store(array $data): Post
+   public static function store(array $data): Tag
    {
-       $tags = $data['tags'];
-       Arr::forget($data, 'tags');
-
        try {
            DB::beginTransaction();
-           $post = Post::create($data);
-           $post->tags()->attach($tags);
+           $tag = Tag::create($data);
            DB::commit();
        } catch (\Exception $exception) {
            DB::rollBack();
            abort($exception->getCode(), $exception->getMessage());
        }
 
-       return $post;
+       return $tag;
    }
-
 }

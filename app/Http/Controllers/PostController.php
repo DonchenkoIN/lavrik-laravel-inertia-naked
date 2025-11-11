@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Post\StoreRequest;
 use App\Http\Requests\Post\UpdateRequest;
 use App\Http\Resources\Post\PostResource;
+use App\Http\Resources\Tag\TagResource;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Services\PostService;
 use Illuminate\Http\Request;
 
@@ -27,7 +29,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return inertia('Post/Create');
+        $tags = Tag::all();
+        $tags = TagResource::collection($tags)->resolve();
+        return inertia('Post/Create', compact('tags'));
     }
 
     /**
